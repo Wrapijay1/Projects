@@ -1,0 +1,135 @@
+package convert;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import junit.framework.JUnit4TestAdapter;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class ConvertTest extends ConvertTestBase {
+
+ /**
+   * test for input real number
+   */
+
+@Test public void checkNum1() throws Exception { 
+	
+ 	assertEquals(amount.getValue(), 1.00);
+}
+
+/**
+   * test for input not number
+   */
+
+@Test public void checkNum2() throws Exception { 
+	
+ 	assertNotEquals(amount.getValue(), "a");
+}
+
+/**
+   * test for correct convert
+   */
+
+@Test public void currencyMoney1() throws Exception { 
+	
+ 	amount.getValue() = 1.00;
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	price = "0.83716444";
+	assertEquals(displayLabel.getText(),  price);
+}
+
+/**
+   * test for wrong correction
+   */
+
+@Test public void currencyMoney2() throws Exception { 
+	
+ 	amount.getValue() = 1.00;
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	price = "2";
+	assertNotEquals(displayLabel.getText(),  price);
+}
+/**
+   * test for input negative number
+   */
+
+@Test public void currencyMoney3() throws Exception { 
+	
+ 	amount.getValue() = -1.00;
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	price = "0.83716444";
+	assertEquals(amount.setValue(), 1.00);
+	assertEquals(displayLabel.getText(),  price);
+}
+
+/**
+   * test for input not number and convert
+   */
+
+@Test public void currencyMoney4() throws Exception { 
+	
+ 	amount.getValue() = "a";
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	price = "0.83716444";
+	assertEquals(amount.setValue(), 1.00);
+	assertEquals(displayLabel.getText(),  price);
+}
+
+/**
+   * test for real number and convert
+   */
+
+@Test public void currencyMoney5() throws Exception { 
+	
+ 	amount.getValue() = 10.00;
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	price = "8.3716444";
+	assertEquals(displayLabel.getText(),  price);
+}
+
+/**
+   * test for real number and correct convert
+   */
+
+@Test public void currencyMoney6() throws Exception { 
+	
+ 	amount.getValue() = 1.00;
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "GBP-UK Pound";
+	price = "0.73";
+	assertEquals(displayLabel.getText(),  price);
+}
+
+/**
+   * test for alphabetical order
+   */
+
+@Test public void listAlphabet() throws Exception { 
+	
+ 	int index1 = fromlist.getSelectedIndex();
+	int index2 = fromlist.getSelectedIndex();
+	fromList.getSelectedValue() = "USD-US DOllar";
+	toList.getSelectedValue() = "EUR-Euro";
+	assertTrue(index1<index2);
+}
+  
+  /**
+   * JUnit suite target
+   */
+  public static junit.framework.Test suite() {
+    return new JUnit4TestAdapter(AggregateTest.class);
+  }
+}
+
+/**
+   * If user clicks blue button
+   */
+
+
